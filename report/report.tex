@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[hidelinks]{hyperref}
+
+\title{2D Heat Conduction FDM Python Implementation}
+\author{haoran0115}
+
+\begin{document}
+\maketitle
+
+\section{The Equation}
+The heat conduction equation could be written in the form of
+\begin{equation}
+    \frac{\partial u}{\partial t} - \alpha\nabla^2 u = 0
+\end{equation}
+where $u = (\mathbf{x}, t)$ is the temperature, $\mathbf{x}$ is the
+coordinate, and $t$ is time.
+FDM could be used to solve this equation numerically by setting static boundary
+condition and setting grid in $\mathbf{x}$-coordinate space.
+For the case of 2D where $\mathbf{x} = (x, y)$, setup meshgrid like
+$\mathbf{x}_{ij} = (x_i, y_j)$ and $x_{i+1} - x_i = \Delta x$,
+$y_{j+1} - y{j} = \Delta y$, then by FDM
+\begin{equation}
+    \frac{u_{ij}^{m+1} - u_{ij}^m}{\Delta t} =
+    \alpha\Delta^2 u_{ij}^m\cdot\frac{1}{\Delta\mathbf{x}^2}
+\end{equation}
+where
+\begin{equation}
+    \Delta^2 u_{ij}^m\cdot\frac{1}{\Delta \mathbf{x}^2} = 
+    \left(
+        \frac{u_{i+1 j} - 2u_{ij} + u_{i-1j}}{\Delta x^2}+
+        \frac{u_{ij+1} - 2u_{ij} + u_{ij-1}}{\Delta y^2}
+    \right)
+\end{equation}
+Note that $u_{ij}^m$ is an approximation to $u(\mathbf{x}_{ij}, m\Delta t)$.
+
+\section{Result}
+Please refer to the \href{../notebook/main.ipynb}{notebook}.
+
+
+
+
+\end{document}
